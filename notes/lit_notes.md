@@ -109,3 +109,47 @@ part is actually coming from.
   the abstract in Block 1B tomorrow to confirm it doesn't already do what LOCUS proposes.
 - "On Pitfalls of Test-Time Adaptation" (Zhao et al., ICML 2023, arXiv:2306.03536) —
   queued for tomorrow (Block 2), not read yet today.
+
+---
+
+## 7. TTA Survey (Liang, He, Tan — arXiv:2303.15361, IJCV 2024)
+
+**Taxonomy confirmed:**
+The survey splits all TTA methods into three categories — TTDA (whole test set), TTBA
+(mini-batch), OTTA (streaming) — purely by data-access pattern. No category, anywhere in
+the taxonomy, is organized around causal mechanism (representation vs. boundary). This is
+the clearest confirmation yet that the entire field's organizing framework has never asked
+LOCUS's question.
+
+**Why this matters for LOCUS:**
+A comprehensive survey covering the whole field, as of 2023-2024, had every opportunity to
+notice the representation-vs-boundary distinction as a category worth taxonomizing by. It
+didn't. That's not proof no one has thought about it — but it's strong evidence the question
+sits outside how the field currently organizes its own knowledge.
+
+---
+
+## 8. On Pitfalls of Test-Time Adaptation (Zhao et al., ICML 2023) — arXiv:2306.03536
+
+**Three pitfalls identified (via their TTAB benchmark):**
+1. Hyperparameter/model-selection is difficult due to online batch dependency
+2. TTA effectiveness varies significantly with pretrained model quality
+3. No existing method handles all distribution shift types well
+
+**Why this matters for LOCUS:**
+All three pitfalls are about *when* TTA works, not *why* it works when it does. Even a
+paper explicitly designed to stress-test TTA methods and expose their weaknesses never
+asks the representation-vs-boundary question — it only asks "does accuracy hold up."
+Reinforces that this is a genuine blind spot, not just an oversight in one or two papers.
+
+---
+
+## 9. Updated gap statement (revised after reading survey + pitfalls papers)
+
+The gap isn't just that three early papers (TENT, Schneider, Nado) noticed and dropped the
+calibration question. It's that the field's own comprehensive taxonomy (Liang et al.) and
+its own most rigorous stress-test (Zhao et al.) both organize TTA entirely around
+data-access patterns and failure conditions — never around causal mechanism. Five papers
+spanning 2020-2024, including the field's survey and its most critical benchmark paper,
+all miss the same question. LOCUS is the first attempt to ask it directly and answer it
+causally rather than by inference from accuracy numbers alone.
