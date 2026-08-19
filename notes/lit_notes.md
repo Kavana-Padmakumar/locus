@@ -153,3 +153,26 @@ data-access patterns and failure conditions — never around causal mechanism. F
 spanning 2020-2024, including the field's survey and its most critical benchmark paper,
 all miss the same question. LOCUS is the first attempt to ask it directly and answer it
 causally rather than by inference from accuracy numbers alone.
+
+
+---
+
+## 10. Mechanistic interpretability literature — activation patching & CKA (Block 2A)
+
+Six papers reviewed: ROME (Meng et al. 2022), causal mediation analysis (Vig et al. 2020),
+causal abstraction (Geiger et al. 2021), activation patching best-practices (Heimersheim &
+Nanda 2024; Zhang & Nanda 2024), and CKA (Kornblith et al. 2019), plus its vision
+application (Raghu et al. 2021, ViT vs CNN comparison).
+
+**Confirmed pattern across all six:** every one applies its causal/similarity tool to a
+model that is static during the analysis — either a single frozen forward pass, or a
+comparison between two separately-trained-but-fixed models. None intervene on a model
+whose weights are changing online, mid-inference, in response to the very data being
+analyzed. This is exactly the gap LOCUS needs: TTA models are the first case where the
+thing being causally probed is not holding still.
+
+**Engineering implication flagged for Phase 3:** since no prior activation-patching
+implementation has been built for a two-weight-state system (source theta vs. adapted
+theta-prime), the dual-parameter-state forward pass (Block 8) has no existing reference
+implementation to build from — this is genuinely new engineering, not an adaptation of
+an off-the-shelf tool.
