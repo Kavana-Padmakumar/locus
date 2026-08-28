@@ -1,0 +1,3 @@
+﻿torch==<paste version from above>
+torchvision==<paste version from above>
+gdown
