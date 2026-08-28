@@ -1,3 +1,4 @@
-﻿torch==<paste version from above>
-torchvision==<paste version from above>
+﻿torch==2.13.0
+torchvision==0.28.0
+gdown
 gdown
