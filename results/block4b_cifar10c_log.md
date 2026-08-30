@@ -10,7 +10,7 @@ Corruptions extracted: gaussian\_noise, defocus\_blur, snow, brightness, contras
 
 File integrity: each corruption .npy confirmed shape (50000, 32, 32, 3), uint8
 
-Data loader determinism check: <paste PASS or FAIL from Step I>
+Data loader determinism check: PASS (identical images and labels across two runs, same seed, gaussian\_noise severity=3)
 
 
 
