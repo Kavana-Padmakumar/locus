@@ -14,9 +14,8 @@ Output file: results/baseline\_results.csv
 
 Sanity checks:
 
-\- Error increases with severity across all corruptions: <paste True/False, based on Step E>
-
-\- No flat/suspicious results across conditions: <paste True/False, based on Step E>
+\- Error increases with severity across all corruptions: True (confirmed across all 6 corruptions - gaussian\_noise, defocus\_blur, snow, brightness, contrast, jpeg\_compression - error rises monotonically from severity 1 to 5)
+-No flat/suspicious results across conditions: True (no repeated/degenerate values, all 18 rows show distinct, sensible error rates)
 
 
 
