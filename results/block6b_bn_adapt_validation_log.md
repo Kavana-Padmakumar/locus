@@ -32,13 +32,11 @@ match is not expected, only rough consistency per the task's own bar.
 
 Results (src/validate\_bn\_adapt\_vs\_literature.py):
 
-gaussian\_noise, sev5: measured=\[PASTE from Step E]%  published=28.1%  diff=\[PASTE]pp
+gaussian\_noise, sev5: measured=28.99%  published=28.1%  diff=0.89pp
 
-contrast, sev5:       measured=\[PASTE from Step E]%  published=12.6%  diff=\[PASTE]pp
+contrast, sev5:       measured=18.81%  published=12.6%  diff=6.21pp
 
-
-
-Validation: \[PASTE PASSED or FAILED from Step E]
+Validation: PASSED
 
 
 
