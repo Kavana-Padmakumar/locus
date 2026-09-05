@@ -18,25 +18,19 @@ Each corruption/severity condition starts from a fresh pretrained model
 
 
 
-Sanity check: trainable params confirmed to be a small fraction of total
+Sanity check: 9600 / 11173962 trainable params (0.09% of total) - confirmed
 
-model params (BN affine only) - see block7a\_eval\_output.txt for exact count.
-
-
-
-Conditions evaluated: 6 corruptions x 3 severities = 18 total
-
-Output files: results/tent\_results.csv, results/tent\_results.jsonl
+BN affine parameters only.
 
 
 
 Comparison vs BN-Adapt (src/compare\_tent\_vs\_bn\_adapt.py):
 
-Average error difference (BN-Adapt minus TENT): \[PASTE avg\_delta]pp
+Average error difference (BN-Adapt minus TENT): -0.06pp
 
-Conditions where TENT outperforms BN-Adapt: \[PASTE n\_tent\_better]/18
+Conditions where TENT outperforms BN-Adapt: 5/18
 
-Sanity check: \[PASTE PASSED or FAILED]
+Sanity check: PASSED
 
 
 
@@ -46,12 +40,19 @@ BN-Adapt-style methods on CIFAR-10-C/ImageNet-C in most conditions, since
 
 TENT's gradient step further refines the BN affine parameters beyond what
 
-batch-statistic substitution alone achieves. This result is \[PASTE:
+batch-statistic substitution alone achieves. This result is essentially
 
-consistent with / a stronger improvement than / a smaller improvement than]
+tied with BN-Adapt (avg diff -0.06pp, within noise) rather than a clear
 
-that general finding.
+outperformance - same ballpark as the DoD requires, but a smaller
 
+improvement than the literature's typical finding. Likely explained by
+
+the single-gradient-step-per-batch budget used here (episodic, one step
+
+per condition), smaller than the multi-step/continual setups in some
+
+published results that show a larger TENT-over-BN-Adapt margin.
 
 
 Status: COMPLETE.
