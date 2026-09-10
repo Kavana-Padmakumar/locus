@@ -18,8 +18,11 @@ class DualStateModel:
         """model: a freshly-loaded source model (theta)."""
         self.device = device
         self.model = model
-        self.model.eval()
-
+        self.model.train()   # matches eval_bn_adapt.py / eval_tent.py: BN layers use
+                              # per-batch statistics here, not running stats - eval()
+                              # would silently disagree with theta-prime's own behavior
+        for p in self.model.parameters():
+            p.requires_grad_(False)
         self.theta_params = {}
         for name, module in self.model.named_modules():
             if isinstance(module, nn.BatchNorm2d):
