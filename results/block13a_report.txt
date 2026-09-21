@@ -1,0 +1,23 @@
+
+=== LOCUS Report: gaussian_noise, severity 3 (seed 0) ===
+
+CAUSAL DECOMPOSITION (rho)
+Source model error: 47.14%
+TENT-adapted error: 20.31%
+Boundary-only (h_rec) error: 52.73%
+rho = 1.2085
+Interpretation: TTA's improvement on this condition is strongly representation-driven.
+Note: rho > 1 here means the boundary-only control made the model WORSE than the unadapted source (52.73% vs 47.14%), while full TENT adaptation still substantially improved it (20.31%). This points to representation change, not decision-boundary movement, as the active mechanism.
+
+REPRESENTATIONAL SIMILARITY (CKA)
+CKA was computed at every BatchNorm layer between theta and theta-prime.
+Layers with LOWER CKA changed representation MORE under adaptation.
+Most-changed layer: layer4.1.bn1 (CKA = 0.5085)
+Range across all layers: 0.5085 to 0.9802
+
+CAUSAL ACTIVATION PATCHING
+Cumulative patching curve is NON-MONOTONIC.
+All-layers-patched error: 0.115234 (should match TENT's own error rate closely)
+
+TENT ADAPTATION (verification run)
+Accuracy: 80.83%  Error: 19.17%  n=10000
