@@ -78,3 +78,43 @@ def compute_cka_all_layers(model_a, model_b, images, device):
     for name in acts_a:
         results[name] = linear_cka(acts_a[name], acts_b[name])
     return results
+
+import json
+import hashlib
+
+CACHE_DIR = "cache/cka"
+
+
+def _cache_key(model_a_name: str, model_b_name: str, probe_set_path: str) -> str:
+    """Builds one unique ID string for a given (model_a, model_b, probe set) combo."""
+    probe_stat = os.path.getmtime(probe_set_path)
+    raw = f"{model_a_name}|{model_b_name}|{probe_set_path}|{probe_stat}"
+    return hashlib.sha256(raw.encode()).hexdigest()[:16]
+
+
+def _cache_path(key: str) -> str:
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    return os.path.join(CACHE_DIR, f"{key}.json")
+
+
+def cached_compute_cka_all_layers(model_a, model_b, images, device,
+                                   model_a_name, model_b_name,
+                                   probe_set_path="data/cka_probe_set.pt"):
+    """
+    Same as compute_cka_all_layers, but checks disk first.
+    model_a_name / model_b_name: just plain strings you choose,
+    e.g. "resnet18" or "resnet18_self_check" - used only to build the cache key.
+    """
+    key = _cache_key(model_a_name, model_b_name, probe_set_path)
+    path = _cache_path(key)
+
+    if os.path.exists(path):
+        with open(path, "r") as f:
+            return json.load(f)
+
+    results = compute_cka_all_layers(model_a, model_b, images, device)
+
+    with open(path, "w") as f:
+        json.dump(results, f, indent=2)
+
+    return results

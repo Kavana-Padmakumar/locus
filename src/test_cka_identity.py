@@ -7,7 +7,7 @@ import sys, os
 sys.path.append(os.path.dirname(__file__))
 
 import torch
-from cka import load_probe_set, compute_cka_all_layers
+from cka import load_probe_set, cached_compute_cka_all_layers
 from eval_tent import load_model
 
 def main():
@@ -19,8 +19,7 @@ def main():
 
     model = load_model(device)
 
-    results = compute_cka_all_layers(model, model, images, device)
-
+    results = cached_compute_cka_all_layers(model, model, images, device, model_a_name="resnet18_self_check", model_b_name="resnet18_self_check")
     print(f"\nCKA(model, itself) per layer:")
     all_pass = True
     for name, cka_val in results.items():
