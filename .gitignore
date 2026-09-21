@@ -1,2 +1,5 @@
 papers\*.pdf 
 data_raw/
+
+cache/
+src/cifar10_models/state_dicts/
